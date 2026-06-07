@@ -13,7 +13,7 @@ export function ChatWindow() {
           <MessageBubble key={msg.id} message={msg} />
         ))}
       </div>
-      <MessageInput onSend={sendMessage} onStop={stopStream} isStreaming={isStreaming} disabled={isStreaming} />
+      <MessageInput onSend={sendMessage} onStop={stopStream} isSending={isStreaming} disabled={isStreaming} />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom';
 import {useAuthStore} from './stores/authStore.ts';
-import ChatPage from './pages/ChatPage';
+import {ChatPage} from './pages/ChatPage';
 import LoginPage from './pages/LoginPage'; 
 
 function ProtectedRoute ({children}: {children: React.ReactNode}){
