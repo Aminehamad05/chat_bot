@@ -23,10 +23,14 @@ export function useChat() {
             queryClient.setQueryData(['messages', activeConversationId], ((old: Message[] = []) => [...old,optimistic]))
         }
     })
+    const stopStream = () => {
+        clearStream();
+    }
     return {
         messages : messages.data ?? [],
         isLoading: messages.isLoading,
         sendMessage: (content : string) => sendMessage.mutate(content),
         isStreaming: false,
+        stopStream
     }
 }
