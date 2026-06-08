@@ -9,7 +9,6 @@ import { useChat } from '../hooks/useChat'
 import { chatService } from '../services/chatService'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-
 export function ChatPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams()
@@ -49,6 +48,7 @@ export function ChatPage() {
   }, [conversationId, setActiveConversation])
 
   const { messages, isLoading, isStreaming, sendMessage,stopStream } = useChat()
+
 
   return (
     <AppLayout>

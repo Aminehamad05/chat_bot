@@ -4,7 +4,7 @@ import { MessageBubble } from './MessageBubble'
 import {MessageInput} from '../input/MessageInput'
 
 export function ChatWindow() {
-  const { messages, sendMessage, isLoading,stopStream ,isStreaming } = useChat()
+  const { messages, sendMessage, stopStream, isStreaming } = useChat()
 
   return (
     <div>

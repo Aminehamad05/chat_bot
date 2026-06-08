@@ -13,7 +13,7 @@ export function Header({ isDark, onToggleTheme }: Props) {
   const isLoggedIn = !!token
 
   return (
-    <header className={`w-full flex items-center justify-between px-6 py-3 border-b
+    <header className={`w-full ml-0 flex items-center justify-between px-6 py-3 border-b
       ${isDark
         ? 'bg-gray-900 border-gray-800 text-white'
         : 'bg-white border-gray-200 text-gray-900'}`}>

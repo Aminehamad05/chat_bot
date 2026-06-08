@@ -18,6 +18,7 @@ export function ConversationItem({ conversation }: Props) {
   }
 
   return (
+    <div className="border-b border-gray-700">
     <button
       onClick={handleClick}
       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm transition-colors
@@ -28,5 +29,6 @@ export function ConversationItem({ conversation }: Props) {
       <MessageSquare size={15} className="flex-shrink-0" />
       <span className="truncate">{conversation.title}</span>
     </button>
+    </div>
   )
 }

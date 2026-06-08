@@ -5,14 +5,14 @@ import type {Message} from "../types/chat";
 
 export function useChat() {
     const queryClient = useQueryClient();
-    const {activeConversationId,appendStreamChunk,clearStream} = useChatStore();
+    const {activeConversationId, clearStream} = useChatStore();
     const messages = useQuery({
         queryKey:['messages', activeConversationId],
         queryFn : () => chatService.getMessages(activeConversationId!),
         enabled:!!activeConversationId,
     })
     const sendMessage = useMutation({
-        mutationFn: async (content:string)=> {},
+        mutationFn: async (_content:string)=> {},
         onMutate : async (content) => {
             const optimistic: Message = {
             id: crypto.randomUUID(),
