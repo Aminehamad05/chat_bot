@@ -5,9 +5,10 @@ import { useAuth } from '../../hooks/useAuth'
 interface Props {
   isDark: boolean
   onToggleTheme: () => void
+  isSidebarOpen?: boolean
 }
 
-export function Header({ isDark, onToggleTheme }: Props) {
+export function Header({ isDark, onToggleTheme, isSidebarOpen }: Props) {
   const token = useAuthStore((s) => s.token)
   const { user, logout } = useAuth()
   const isLoggedIn = !!token
@@ -19,14 +20,17 @@ export function Header({ isDark, onToggleTheme }: Props) {
         : 'bg-white border-gray-200 text-gray-900'}`}>
 
       {/* Left — brand */}
-      <div className="flex items-center gap-2">
-        <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
-          <MessageSquare size={14} className="text-white" />
+      {!isSidebarOpen && (
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
+            <MessageSquare size={14} className="text-white" />
+          </div>
+          <span className="font-semibold text-sm">Chatbot</span>
         </div>
-        <span className="font-semibold text-sm">Chatbot</span>
-      </div>
+      )}
 
       {/* Right — actions */}
+   <div className="ml-auto flex items-center gap-2">
       <div className="flex items-center gap-2">
 
         {/* Theme toggle — always visible */}
@@ -74,6 +78,7 @@ export function Header({ isDark, onToggleTheme }: Props) {
             Not signed in
           </div>
         )}
+      </div>
       </div>
     </header>
   )

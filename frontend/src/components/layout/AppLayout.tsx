@@ -13,11 +13,11 @@ export function AppLayout({ children }: Props) {
       <div
         className={`fixed inset-y-0 left-0 z-30 transition-all duration-200 ease-out ${isSidebarOpen ? 'w-67' : 'w-16'}`}
       >
-        <Sidebar />
+        <Sidebar isDark={isDark} />
       </div>
 
       <main className={`flex-1 flex flex-col min-w-0 transition-all duration-200 ${isSidebarOpen ? 'md:ml-64' : 'md:ml-16'}`}>
-        <Header isDark={isDark} onToggleTheme={toggleTheme} />
+        <Header isDark={isDark} isSidebarOpen={isSidebarOpen} onToggleTheme={toggleTheme} />
 
         {children}
       </main>

@@ -17,7 +17,7 @@ export function EmptyState({ onSuggestionClick }: Props) {
 
   return (
     <div className={`flex-1 flex flex-col items-center justify-center gap-8 px-6 py-12
-      ${isDark ? 'text-white' : 'text-gray-900'}`}>
+      ${isDark ? 'text-white ' : 'text-gray-900 bg-white'}`}>
 
       {/* Icon + greeting */}
       <div className="flex flex-col items-center gap-4 text-center">
@@ -26,7 +26,7 @@ export function EmptyState({ onSuggestionClick }: Props) {
         </div>
         <div>
           <h2 className="text-2xl font-bold">How can I help you?</h2>
-          <p className={`text-sm mt-1.5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+          <p className={`text-sm mt-1.5 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
             Start a new conversation or pick a suggestion below
           </p>
         </div>
