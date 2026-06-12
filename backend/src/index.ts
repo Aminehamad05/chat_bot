@@ -6,7 +6,7 @@ import { env } from "./config/env";
 import { errorHandler } from "./middleware/errorHandler";
 import { apiLimiter } from "./middleware/rateLimiter";
 import { requestLogger } from "./middleware/requestLogger";
-
+import authRoutes from './routes/auth.routes';
 const app = express();
 
 /* ─────────────────────────────────────────────
@@ -42,12 +42,14 @@ app.use("/api", apiLimiter);
 /* ─────────────────────────────────────────────
    5. Routes
 ───────────────────────────────────────────── */
+app.use('/api/auth', authRoutes);
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     timestamp: new Date().toISOString(),
   });
-});
+});   
+
 
 /* ─────────────────────────────────────────────
    6. Error handler (MUST be last)
