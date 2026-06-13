@@ -1,4 +1,3 @@
-import { isSingleStoreSchema } from 'drizzle-orm/singlestore-core';
 import {Request, Response, NextFunction} from 'express';
 export class AppError extends Error{
     constructor(public message: string, public statusCode: number = 500){

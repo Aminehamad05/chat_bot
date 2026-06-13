@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-
+import conversationRoutes from './routes/conversation.routes'
 import { env } from "./config/env";
 import { errorHandler } from "./middleware/errorHandler";
 import { apiLimiter } from "./middleware/rateLimiter";
@@ -43,6 +43,7 @@ app.use("/api", apiLimiter);
    5. Routes
 ───────────────────────────────────────────── */
 app.use('/api/auth', authRoutes);
+app.use('/api/conversations', conversationRoutes)
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",
