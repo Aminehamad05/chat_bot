@@ -1,17 +1,25 @@
 import type { LoginCredentials, RegisterCredentials, AuthResponse } from '../types/auth'
 import { mockAuthService } from '../mocks/auth'
+import { api } from './api';
 
 // When your Express backend is ready, replace each mock call with:
 // import { api } from './api'
 // api.post<AuthResponse>('/auth/login', credentials).then(r => r.data)
 
 export const authService = {
-  login: (credentials: LoginCredentials): Promise<AuthResponse> =>
-    mockAuthService.login(credentials),
+  login: async (credentials: LoginCredentials): Promise<AuthResponse> =>{
+    const res = await api.post<AuthResponse>('/auth/login', credentials)
+    return res.data;
+  },
+    
 
-  register: (credentials: RegisterCredentials): Promise<AuthResponse> =>
-    mockAuthService.register(credentials),
+  register: async (credentials: RegisterCredentials): Promise<AuthResponse> =>{
+    const res = await api.post<AuthResponse>('/auth/register', credentials)
+    return res.data;
+  },
 
-  logout: (): Promise<void> =>
-    mockAuthService.logout(),
+  logout: async (): Promise<void> =>{
+    localStorage.removeItem("token");
+    return Promise.resolve();
+  }
 }

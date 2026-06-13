@@ -1,57 +1,35 @@
-import type { Message } from '../../types/chat';
-import {MessageBubble} from './MessageBubble';
-import StreamingBubble from './StreamingBubble';
-import {TypingIndicator} from './TypingIndicator';
+import { useEffect, useRef } from 'react'
+import { MessageBubble } from './MessageBubble'
+import { TypingIndicator } from './TypingIndicator'
+import { StreamingBubble } from './StreamingBubble'
+import type { Message } from '../../types/chat'
 
 interface Props {
-  messages: Message[];
-  isStreaming: boolean;
+  messages: Message[]
+  isSending: boolean
+  streamingContent: string
 }
 
-export function MessageList({
-  messages,
-  isStreaming,
-}: Props) {
-  const lastMessage =
-    messages[messages.length - 1];
+export function MessageList({ messages, isSending, streamingContent }: Props) {
+  const bottomRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, isSending, streamingContent])
 
   return (
-    <>
-      {messages.map((message, index) => {
-        const isLast =
-          index === messages.length - 1;
+    <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-4">
+      {messages.map((msg) => (
+        <MessageBubble key={msg.id} message={msg} />
+      ))}
 
-        const isAssistant =
-          message.role === 'assistant';
+      {/* Show typing indicator while waiting for first token */}
+      {isSending && !streamingContent && <TypingIndicator />}
 
-        if (
-          isStreaming &&
-          isLast &&
-          isAssistant
-        ) {
-          return (
-            <StreamingBubble
-              key={message.id}
-              message={message}
-            />
-          );
-        }
+      {/* Show streaming bubble once tokens start arriving */}
+      {streamingContent && <StreamingBubble content={streamingContent} />}
 
-        return (
-          <MessageBubble
-            key={message.id}
-            message={message}
-          />
-        );
-      })}
-
-      {isStreaming &&
-        (!lastMessage ||
-          lastMessage.role !== 'assistant') && (
-          <TypingIndicator />
-        )}
-    </>
-  );
+      <div ref={bottomRef} />
+    </div>
+  )
 }
-
-export default MessageList;

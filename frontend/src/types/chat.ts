@@ -5,6 +5,7 @@ export interface Message {
   id: string
   role: Role
   content: string
+  conversationId : string
   createdAt: string
 }
 
